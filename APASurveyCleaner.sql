@@ -2,7 +2,6 @@
     .csv file can be exported from: 'https://apasurvey.philx.org/surveys' 
 	
     Some simple edits must be made to the .csv file in excel before running qurery:
-		- add incremental id column titled 'id' as first column
 		- FIND/REPLACE ALL empty values in 'Comment count', 'Comment quality', 'Editor experience' and 'Response time' columns to 0
 		- Delete final three columns 'Time from acceptance to publication', 'Date of acceptance', and 'Blurb'
     
@@ -21,7 +20,7 @@ CREATE DATABASE apasurveys;
 
 --  Creates table --
 CREATE TABLE apasurveys.apa2023(
-    id INT NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
     Journal_name VARCHAR(150) NOT NULL,
     Create_date VARCHAR (50) NOT NULL,
     Gender VARCHAR (50),
@@ -46,11 +45,10 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
-(id, Journal_name, Create_date, Gender, Demographics, Comment_count, Comment_quality, Editor_experience, Professional_status, Verdict, Second_verdict, Response_time); 
+(Journal_name, Create_date, Gender, Demographics, Comment_count, Comment_quality, Editor_experience, Professional_status, Verdict, Second_verdict, Response_time); 
 
---  Displays the raw data loaded into table
+--  Displays the raw data loaded into the table
 --  SELECT * FROM apasurveys.apa2023;
-
 
 /*
     2. CHANGING BLANK ENTRIES TO SQL NULL VALUES
@@ -81,10 +79,10 @@ UPDATE apasurveys.apa2023
     WHERE Second_verdict = '';
 
 /*
-    3. CLEANING SOME ANOMOLOUS DATA ENTRIES
+    3. CLEANING SOME ANOMALOUS DATA ENTRIES
 */
 
---  Checks (then removes) anaomolous relationship between Comment_count = 0 and Comment_quality != NULL: in my case 231 rows deleted --
+--  Checks (then removes) anomalous relationship between Comment_count = 0 and Comment_quality != NULL: in my case 231 rows deleted --
 /*	SELECT Comment_count, Comment_quality FROM apasurveys.apa2023
 	WHERE Comment_count = 0
     AND Comment_quality != 0;*/
@@ -93,14 +91,14 @@ DELETE FROM apasurveys.apa2023
     WHERE Comment_count = 0
     AND Comment_quality != 0;
 
---  Checks (then removes) anomolous Responce_time of 0: in my case 280 rows deleted
+--  Checks (then removes) anomalous Responce_time of 0: in my case 280 rows deleted
 /*	SELECT * FROM apasurveys.apa2023
     WHERE Response_time = 0;*/
     
 DELETE FROM apasurveys.apa2023
     WHERE Response_time = 0;
     
--- Checks (then removes) anomlous Repsonce_time of greater than 5 years: in my case 7 rows deleted
+-- Checks (then removes) anomalous Repsonce_time of greater than 5 years: in my case 7 rows deleted
 /*	SELECT * FROM apasurveys.apa2023
     WHERE Response_time > 60;*/
     
@@ -111,7 +109,7 @@ DELETE FROM apasurveys.apa2023
     4. CHECKING FOR AND MERGING ENTRIES FOR JOURNALS WITH NAME VARIATIONS
 */
 
---  Lists all journal names alpabetically to see obvious variants --
+--  Lists all journal names alphabetically to see obvious variants --
 /*	SELECT DISTINCT Journal_name
     FROM apasurveys.apa2023
     GROUP BY Journal_name
@@ -170,7 +168,7 @@ UPDATE apasurveys.apa2023
 	SET Journal_name = 'Thought'
     WHERE Journal_name = 'Thought: A Journal of Philosophy';
     
--- Studies in the History and Philosophy of Science (Parts A, B, C now one journal: Merging all entires so there is at least some historical data for this jounral)
+-- Studies in the History and Philosophy of Science (Parts A, B, C now one journal: Merging all entries so there is at least some historical data for this journal)
 UPDATE apasurveys.apa2023
 	SET Journal_name = 'Studies in the History and Philosophy of Science'
     WHERE Journal_name = 'Studies in History and Philosophy of Science Part A' 
@@ -204,7 +202,7 @@ DELETE FROM apasurveys.apa2023
 -- Total table of surveys
 SELECT * FROM apasurveys.apa2023;
 
--- Number of survey remainng after clean: in my case 8504
+-- Number of surveys remaining after clean: in my case 8504
 SELECT Count(*) FROM apasurveys.apa2023;
 
 -- List of journals 
