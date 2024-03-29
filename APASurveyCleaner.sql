@@ -28,8 +28,8 @@ CREATE TABLE apasurveys.apa2024(
     Verdict VARCHAR (50),
     Second_verdict VARCHAR (50),
     Response_time VARCHAR (50),
-	Acpt_to_pub VARCHAR (50),
-	Acpt_date VARCHAR (50),
+    Acpt_to_pub VARCHAR (50),
+    Acpt_date VARCHAR (50),
     Comments VARCHAR (5000),
     PRIMARY KEY (id)
 );
@@ -104,12 +104,6 @@ UPDATE apasurveys.apa2024
 
 ALTER TABLE apasurveys.apa2024
 	MODIFY COLUMN Comment_count INT NOT NULL;
-
-ALTER TABLE apasurveys.apa2024
-	MODIFY COLUMN Comment_quality INT NULL;
-    
-ALTER TABLE apasurveys.apa2024
-	MODIFY COLUMN Editor_experience INT NULL;
 
 /*
     4. CLEANING ANOMALOUS DATA ENTRIES
