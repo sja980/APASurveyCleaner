@@ -81,8 +81,7 @@ UPDATE apasurveys.apa2024
 -- This relates to the subsequent cleanup of the relationship between Comment_count and Comment_quality; it's assumed safest to remove both NULL and empty values when there is also a Comment_quality value recorded.
 UPDATE apasurveys.apa2024
     SET Comment_count = 0
-    WHERE Comment_count = ''
-	OR Comment_count = 0;
+    WHERE Comment_count = '';
     
 UPDATE apasurveys.apa2024
     SET Comment_quality = NULL
