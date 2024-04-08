@@ -1,10 +1,10 @@
-/*  GUIDE
-    The latest .csv file can be exported from: 'https://apasurvey.philx.org/surveys' 
+/*  
+The latest .csv file can be exported from: 'https://apasurvey.philx.org/surveys' 
     
-    To run:
-    Execute all queries and then export clean data from 'apa2024' table.
-    OR
-    Scroll through and uncomment select functions as desired.
+To run:
+Execute all queries and export clean data from the 'apa2024' table.
+	OR
+Scroll through and uncomment SELECT functions as desired.
 */
 
 /*
