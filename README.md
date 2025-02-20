@@ -1,5 +1,5 @@
 # Data Cleaner for the APA's Journal Surveys
-<h3>A simple SQL script for cleaning survey data from the American Philosophical Organisation's Journal Survey project.</h3><br>
+<h3>A simple SQL script for cleaning survey data from the American Philosophical Association's Journal Survey project.</h3><br>
 
 <h4>Files:</h4>
 'APASurveyCleaner.sql' is the SQL data cleaning script<br>
